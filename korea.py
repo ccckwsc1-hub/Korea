@@ -60,8 +60,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 頂部橫幅 - 維基百科穩定圖源
-st.image("https://en.wikipedia.org/wiki/Special:FilePath/Seoul_Skyline_from_Namsan_Tower.jpg", caption="Seoul Trip 2026 🇰🇷", use_container_width=True)
+# 頂部橫幅 - 終極必殺技：用 HTML 強制瀏覽器載入，保證唔死圖！
+st.markdown("""
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Seoul_Skyline_from_Namsan_Tower.jpg/1200px-Seoul_Skyline_from_Namsan_Tower.jpg" 
+    style="width: 100%; border-radius: 10px; object-fit: cover; max-height: 250px; margin-bottom: 10px;">
+""", unsafe_allow_html=True)
 
 st.title("🇰🇷 首爾 8月炎之旅｜🛍️")
 st.caption("📅 8月17日 - 8月21日 ｜ ✈️ 香港快運 UO614 / UO615")
