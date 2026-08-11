@@ -3,6 +3,8 @@ import folium
 from streamlit_folium import st_folium
 import requests
 
+# 頂部橫幅
+st.image("https://images.unsplash.com/photo-1584286595398-a59f2afdd7ea?auto=format&fit=crop&w=1200&h=400&q=80", caption="Seoul Trip 2026 🇰🇷", use_container_width=True)
 # 網頁基本設定
 st.set_page_config(page_title="🇰🇷 首爾 8月炎之旅", page_icon="✈️", layout="centered")
 
