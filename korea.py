@@ -6,6 +6,28 @@ import requests
 # 網頁基本設定
 st.set_page_config(page_title="🇰🇷 首爾 8月炎之旅", page_icon="✈️", layout="centered")
 
+# --- 🎨 改版 1：自訂米色背景 ---
+st.markdown("""
+<style>
+    /* 將主背景轉為米色 */
+    .stApp {
+        background-color: #FAF0E6; 
+    }
+    /* 確保字體喺淺色背景下清楚可見 */
+    h1, h2, h3, h4, h5, h6, p, li {
+        color: #333333;
+    }
+    /* 讓 Tab 嘅背景更夾個主題 */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 2px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        background-color: #F5F5DC;
+        border-radius: 4px 4px 0px 0px;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # 頂部橫幅
 st.image("https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=800&q=80", caption="Seoul Trip 2026 🇰🇷")
 st.title("🇰🇷 首爾 8月炎之旅｜🛍️")
@@ -14,7 +36,7 @@ st.caption("📅 8月17日 - 8月21日 ｜ ✈️ 香港快運 UO614 / UO615")
 # 導覽頁籤 (Tabs)
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["🗓️ 每日行程", "🗺️ 行程地圖", "✈️ 航班/住宿", "💱 即時匯率", "🛒 購物清單"])
 
-# --- Tab 1: 每日行程 ---
+# --- Tab 1: 每日行程 (改版 2：加入真實地圖連結) ---
 with tab1:
     day = st.selectbox("選擇日期：", [
         "Day 1 - 8/17 (一) : 合井，弘大，延南洞",
@@ -28,41 +50,42 @@ with tab1:
     if "Day 1" in day:
         st.subheader("📍 Day 1: 合井，弘大，延南洞")
         st.write("**首爾弘大清單來了🥳**")
+        # 使用 Markdown 語法 [顯示文字](網址) 來製作超連結
         st.markdown("""
-        * **🍳 早餐**：Hippo
-        * **🥩 午餐**：吃草的豬
-        * **🐟 晚餐**：風川鰻魚
+        * **🍳 早餐**：[Hippo (點擊開啟地圖)](https://www.google.com/maps/search/?api=1&query=Hippo+Cafe+Yeonnam)
+        * **🥩 午餐**：[吃草的豬 (點擊開啟地圖)](https://www.google.com/maps/search/?api=1&query=풀뜯는돼지+Hongdae)
+        * **🐟 晚餐**：[風川鰻魚 (點擊開啟地圖)](https://www.google.com/maps/search/?api=1&query=風川鰻魚+Hongdae)
         """)
     elif "Day 2" in day:
         st.subheader("📍 Day 2: 聖水洞")
         st.write("**2026最新｜首爾聖水一日遊攻略**")
         st.markdown("""
-        * **🍜 早餐**：朝朝刀削麵
+        * **🍜 早餐**：[朝朝刀削麵 (點擊開啟地圖)](https://www.google.com/maps/search/?api=1&query=조조칼국수+Seongsu)
         * **🍽️ 午餐**：*(待定)*
-        * **🦪 晚餐**：贝壳Do
+        * **🦪 晚餐**：[贝壳Do (點擊開啟地圖)](https://www.google.com/maps/search/?api=1&query=贝壳Do+Seongsu)
         """)
     elif "Day 3" in day:
         st.subheader("📍 Day 3: 明洞，東大門")
         st.write("**明洞**")
         st.markdown("""
-        * **🥣 早餐**：鮑魚粥
-        * **🦀 午餐**：醬油蟹
-        * **🥩 晚餐**：燒肉
+        * **🥣 早餐**：[鮑魚粥](https://www.google.com/maps/search/?api=1&query=明洞+鮑魚粥)
+        * **🦀 午餐**：[醬油蟹](https://www.google.com/maps/search/?api=1&query=明洞+醬油蟹)
+        * **🥩 晚餐**：[燒肉](https://www.google.com/maps/search/?api=1&query=明洞+燒肉)
         """)
-        st.info("**東大門**\n參觀設計廣場（DDP，未來感建築，白天／晚上燈光都美）、購物中心（Doota、Migliore等）。東大門市場／夜市晚上更熱鬧（很多店開很晚），街頭小吃豐富。")
+        st.info("**東大門**\n參觀[設計廣場 DDP](https://www.google.com/maps/search/?api=1&query=Dongdaemun+Design+Plaza)、購物中心（Doota、Migliore等）。東大門市場／夜市晚上更熱鬧（很多店開很晚），街頭小吃豐富。")
     elif "Day 4" in day:
         st.subheader("📍 Day 4: 奉恩寺，星空圖書館")
         st.write("**奉恩寺 + 星空圖書館（江南COEX，傳統+現代）**\n兩地極近（步行可達）。")
         st.markdown("""
-        * **⛩️ 上午（較涼快）：奉恩寺**
+        * **⛩️ 上午（較涼快）：[奉恩寺](https://www.google.com/maps/search/?api=1&query=Bongeunsa+Temple)**
           地鐵2號線三成站或9號線奉恩寺站。開放約05:00–22:00（全年無休，免費）。巨大佛像、寧靜庭園與高樓對比強烈，適合1–1.5小時參訪。
-        * **📚 中午後：星空圖書館 @ COEX Mall**
+        * **📚 中午後：[星空圖書館 @ COEX Mall](https://www.google.com/maps/search/?api=1&query=Starfield+Library+COEX)**
           開放約10:30–22:00，免費。巨型書架超好拍，可坐下休息看書。逛COEX商場（購物、吃飯、可選水族館）。
         """)
     elif "Day 5" in day:
         st.subheader("📍 Day 5: 昌信洞玩具街，弘大")
         st.markdown("""
-        * **白天**：昌信洞玩具街，弘大
+        * **白天**：[昌信洞玩具街](https://www.google.com/maps/search/?api=1&query=Changsin-dong+Toy+Alley)，弘大
         * **🚨 返程時間軸**：
             * `(五) 22:00` 出發去機場
             * `(五) 23:00` 到機場
@@ -71,7 +94,7 @@ with tab1:
 
 # --- Tab 2: 互動地圖 ---
 with tab2:
-    st.subheader("🗺️ 景點、餐廳與住宿地圖")
+    st.subheader("🗺️ 景點、餐廳與住宿總覽")
     m = folium.Map(location=[37.5500, 127.0000], zoom_start=12)
     
     # 🏨 住宿
@@ -95,7 +118,7 @@ with tab2:
     folium.Marker([37.5700, 127.0140], popup="🧸 昌信洞玩具街", icon=folium.Icon(color="blue", icon="info-sign")).add_to(m)
     
     st_folium(m, width="100%", height=450)
-    st.caption("💡 提示：紅色係民宿、橙色係餐廳🍽️、藍色/紫色係景點📍。點擊 Icon 可以睇到個名！")
+    st.caption("💡 提示：呢度可以一次過睇晒全部位置分佈。紅色係住宿、橙色係餐廳🍽️、藍/紫色係景點📍。")
 
 # --- Tab 3: 航班與住宿 ---
 with tab3:
