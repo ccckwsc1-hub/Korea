@@ -60,14 +60,22 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 頂部橫幅 - 終極必殺技：用 HTML 強制瀏覽器載入，保證唔死圖！
+# 頂部橫幅 - 放棄外部圖片，改用漸層色塊 + 文字橫幅 (100% 唔會死圖，秒速 Load 完)
 st.markdown("""
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Seoul_Skyline_from_Namsan_Tower.jpg/1200px-Seoul_Skyline_from_Namsan_Tower.jpg" 
-    style="width: 100%; border-radius: 10px; object-fit: cover; max-height: 250px; margin-bottom: 10px;">
+    <div style="background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%); 
+                border-radius: 12px; 
+                padding: 40px 20px; 
+                text-align: center; 
+                margin-bottom: 20px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <h1 style="color: white !important; margin: 0; font-size: 2.2em; text-shadow: 1px 1px 3px rgba(0,0,0,0.2);">
+            🇰🇷 首爾 8月炎之旅 🛍️
+        </h1>
+        <p style="color: white !important; margin: 10px 0 0 0; font-size: 1.1em; opacity: 0.9;">
+            📅 8月17日 - 8月21日 ｜ ✈️ UO614 / UO615
+        </p>
+    </div>
 """, unsafe_allow_html=True)
-
-st.title("🇰🇷 首爾 8月炎之旅｜🛍️")
-st.caption("📅 8月17日 - 8月21日 ｜ ✈️ 香港快運 UO614 / UO615")
 
 # 導覽頁籤 (Tabs)
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["🗓️ 每日行程", "🗺️ 行程地圖", "✈️ 航班/住宿", "💱 即時匯率", "🛒 購物清單"])
