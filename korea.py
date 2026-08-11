@@ -3,8 +3,6 @@ import folium
 from streamlit_folium import st_folium
 import requests
 
-# 頂部橫幅
-st.image("https://images.unsplash.com/photo-1584286595398-a59f2afdd7ea?auto=format&fit=crop&w=1200&h=400&q=80", caption="Seoul Trip 2026 🇰🇷", use_container_width=True)
 # 網頁基本設定
 st.set_page_config(page_title="🇰🇷 首爾 8月炎之旅", page_icon="✈️", layout="centered")
 
@@ -62,8 +60,9 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 頂部橫幅
-st.image("https://images.unsplash.com/photo-1538485399081-7191377e8241?auto=format&fit=crop&w=800&q=80", caption="Seoul Trip 2026 🇰🇷")
+# 頂部橫幅 - 選擇 3：首爾塔迷幻日落（唯美色彩）
+st.image("https://images.unsplash.com/photo-1584286595398-a59f2afdd7ea?auto=format&fit=crop&w=1200&h=400&q=80", caption="Seoul Trip 2026 🇰🇷", use_container_width=True)
+
 st.title("🇰🇷 首爾 8月炎之旅｜🛍️")
 st.caption("📅 8月17日 - 8月21日 ｜ ✈️ 香港快運 UO614 / UO615")
 
@@ -151,6 +150,7 @@ with tab2:
     folium.Marker([37.5700, 127.0140], popup="🧸 昌信洞玩具街", icon=folium.Icon(color="blue", icon="info-sign")).add_to(m)
     
     st_folium(m, width="100%", height=450)
+    st.caption("💡 提示：呢度可以一次過睇晒全部位置分佈。紅色係住宿、橙色係餐廳🍽️、藍/紫色係景點📍。")
 
 # --- Tab 3: 航班與住宿 ---
 with tab3:
