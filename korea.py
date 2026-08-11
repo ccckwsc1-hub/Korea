@@ -6,24 +6,56 @@ import requests
 # 網頁基本設定
 st.set_page_config(page_title="🇰🇷 首爾 8月炎之旅", page_icon="✈️", layout="centered")
 
-# --- 🎨 改版 1：自訂米色背景 ---
+# --- 🎨 深度自訂米色主題 (修正白色遮擋/看不清問題) ---
 st.markdown("""
 <style>
-    /* 將主背景轉為米色 */
+    /* 1. 強制將整個網頁底色設為米色 */
     .stApp {
-        background-color: #FAF0E6; 
+        background-color: #FAF0E6 !important; 
     }
-    /* 確保字體喺淺色背景下清楚可見 */
-    h1, h2, h3, h4, h5, h6, p, li {
-        color: #333333;
+    
+    /* 2. 強制所有主要文字顯示為深灰色，避免與淺底色衝突 */
+    h1, h2, h3, h4, h5, h6, p, li, span, label {
+        color: #333333 !important;
     }
-    /* 讓 Tab 嘅背景更夾個主題 */
+    
+    /* 3. 清除所有可能的預設白色容器底色 (例如頁面外框、區塊) */
+    .stMainBlockContainer, .stDecoration, div[data-testid="stVerticalBlock"] {
+        background-color: transparent !important;
+    }
+
+    /* 4. 優化頂部 Tabs 頁籤的顏色 */
     .stTabs [data-baseweb="tab-list"] {
-        gap: 2px;
+        background-color: transparent !important;
+        gap: 4px;
     }
     .stTabs [data-baseweb="tab"] {
-        background-color: #F5F5DC;
-        border-radius: 4px 4px 0px 0px;
+        background-color: #F5F5DC !important; /* 稍微深一點點的米色作分頁標籤 */
+        border-radius: 6px 6px 0px 0px;
+        color: #555555 !important;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #EEDC82 !important; /* 被選中的 Tab 顏色稍微加深 */
+        color: #000000 !important;
+        font-weight: bold !important;
+    }
+
+    /* 5. 修正下拉選單 (Selectbox) 與輸入框的底色，防止它變成死白 */
+    div[data-baseweb="select"], div[data-baseweb="input"], .stSelectbox, .stNumberInput input {
+        background-color: #F5F5DC !important;
+        border: 1px solid #D2B48C !important;
+        color: #333333 !important;
+    }
+    
+    /* 6. 修正航班資訊等 Info 卡片區塊，不要用預設的亮藍色/白色背景 */
+    .stAlert {
+        background-color: #F5F5DC !important;
+        border-left: 5px solid #D2B48C !important;
+    }
+    
+    /* 7. 修正購物清單 Checkbox 文字顏色 */
+    div[data-testid="stCheckbox"] p {
+        color: #333333 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -36,7 +68,7 @@ st.caption("📅 8月17日 - 8月21日 ｜ ✈️ 香港快運 UO614 / UO615")
 # 導覽頁籤 (Tabs)
 tab1, tab2, tab3, tab4, tab5 = st.tabs(["🗓️ 每日行程", "🗺️ 行程地圖", "✈️ 航班/住宿", "💱 即時匯率", "🛒 購物清單"])
 
-# --- Tab 1: 每日行程 (改版 2：加入真實地圖連結) ---
+# --- Tab 1: 每日行程 ---
 with tab1:
     day = st.selectbox("選擇日期：", [
         "Day 1 - 8/17 (一) : 合井，弘大，延南洞",
@@ -50,7 +82,6 @@ with tab1:
     if "Day 1" in day:
         st.subheader("📍 Day 1: 合井，弘大，延南洞")
         st.write("**首爾弘大清單來了🥳**")
-        # 使用 Markdown 語法 [顯示文字](網址) 來製作超連結
         st.markdown("""
         * **🍳 早餐**：[Hippo (點擊開啟地圖)](https://www.google.com/maps/search/?api=1&query=Hippo+Cafe+Yeonnam)
         * **🥩 午餐**：[吃草的豬 (點擊開啟地圖)](https://www.google.com/maps/search/?api=1&query=풀뜯는돼지+Hongdae)
@@ -100,17 +131,17 @@ with tab2:
     # 🏨 住宿
     folium.Marker([37.5575, 126.9245], popup="🏨 民宿 (GS25 弘大公园店附近)", icon=folium.Icon(color="red", icon="home")).add_to(m)
     
-    # 🍽️ Day 1 餐廳 (弘大/合井/延南洞區)
+    # 🍽️ Day 1 餐廳
     folium.Marker([37.5630, 126.9245], popup="🍳 Hippo (早餐)", icon=folium.Icon(color="orange", icon="cutlery")).add_to(m)
     folium.Marker([37.5550, 126.9220], popup="🥩 吃草的豬 (午餐)", icon=folium.Icon(color="orange", icon="cutlery")).add_to(m)
     folium.Marker([37.5615, 126.9240], popup="🐟 風川鰻魚 (晚餐)", icon=folium.Icon(color="orange", icon="cutlery")).add_to(m)
 
-    # 🍽️ Day 2 餐廳 (聖水洞)
+    # 🍽️ Day 2 餐廳
     folium.Marker([37.5450, 127.0550], popup="🍜 朝朝刀削麵", icon=folium.Icon(color="orange", icon="cutlery")).add_to(m)
     folium.Marker([37.5435, 127.0570], popup="🦪 贝壳Do", icon=folium.Icon(color="orange", icon="cutlery")).add_to(m)
 
-    # 🍽️ Day 3 餐廳 & 景點 (明洞/東大門)
-    folium.Marker([37.5636, 126.9827], popup="🦀 明洞商圈 (鮑魚粥/醬油蟹/燒肉)", icon=folium.Icon(color="orange", icon="cutlery")).add_to(m)
+    # 🍽️ Day 3 餐廳 & 景點
+    folium.Marker([37.5636, 126.9827], popup="🦀 明洞商圈", icon=folium.Icon(color="orange", icon="cutlery")).add_to(m)
     folium.Marker([37.5683, 127.0097], popup="🏛️ 東大門 DDP", icon=folium.Icon(color="purple", icon="info-sign")).add_to(m)
     
     # 📍 Day 4 & 5 其他景點
@@ -118,7 +149,6 @@ with tab2:
     folium.Marker([37.5700, 127.0140], popup="🧸 昌信洞玩具街", icon=folium.Icon(color="blue", icon="info-sign")).add_to(m)
     
     st_folium(m, width="100%", height=450)
-    st.caption("💡 提示：呢度可以一次過睇晒全部位置分佈。紅色係住宿、橙色係餐廳🍽️、藍/紫色係景點📍。")
 
 # --- Tab 3: 航班與住宿 ---
 with tab3:
