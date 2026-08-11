@@ -60,8 +60,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# 頂部橫幅 - 選擇 3：首爾塔迷幻日落（唯美色彩）
-st.image("https://images.unsplash.com/photo-1584286595398-a59f2afdd7ea?auto=format&fit=crop&w=1200&h=400&q=80", caption="Seoul Trip 2026 🇰🇷", use_container_width=True)
+# 頂部橫幅 - 換成穩定高畫質的現代首爾都市夜景 Banner 網址
+st.image("https://images.unsplash.com/photo-1540959733332-eab4deceeaf7?auto=format&fit=crop&w=1200&h=400&q=80", caption="Seoul Trip 2026 🇰🇷", use_container_width=True)
 
 st.title("🇰🇷 首爾 8月炎之旅｜🛍️")
 st.caption("📅 8月17日 - 8月21日 ｜ ✈️ 香港快運 UO614 / UO615")
